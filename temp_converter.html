@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Temperature Converter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: 'Montserrat', sans-serif;
+        display: flex;
+        justify-content: center;
+        background-color: #ffffff;
+      }
+      .main-container {
+        margin: 60px;
+        text-align: center;
+        border: none;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 10px;
+      }
+
+      h1 {
+        margin-bottom: 30px;
+      }
+
+      .upper-box {
+        font-size: 1.2rem;
+        display: flex;
+        margin-bottom: 20px;
+        color: grey;
+      }
+
+      .degree {
+        margin-right: 5px;
+        text-align: left;
+        width: 50%;
+      }
+
+      input[type='number'] {
+        border: none;
+        border-bottom: 1px solid grey;
+        outline: none;
+        box-shadow: none;
+      }
+
+      .type {
+        margin-left: 5px;
+        text-align: left;
+        width: 50%;
+      }
+
+      select {
+        border: none;
+        border-bottom: 1px solid grey;
+        width: 100%;
+        outline: none;
+        box-shadow: none;
+      }
+
+      option {
+        font-size: 0.9rem;
+      }
+
+      .result-box {
+        font-size: 1.2rem;
+        width: 100%;
+        text-align: left;
+      }
+
+      .result-box p {
+        color: grey;
+        margin-bottom: 20px;
+      }
+
+      #result {
+        color: grey;
+        font-size: 14px;
+      }
+
+      /* Base button styles */
+      .button {
+        margin-top: 20px;
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        text-align: center;
+        cursor: pointer;
+        text-decoration: none;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f1f1f1;
+        color: #333;
+        width: 100%;
+      }
+
+      /* Hover state */
+      .button:hover {
+        background-color: #e1e1e1;
+      }
+
+      /* Active state */
+      .button:active {
+        background-color: #d1d1d1;
+      }
+
+      /* Focus state */
+      .button:focus {
+        outline: none;
+        box-shadow: 0 0 5px #999;
+      }
+
+      /* Disabled state */
+      .button:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main-container">
+      <h1>Temperature Converter</h1>
+      <!-- <div class="second-main-container"> -->
+      <div class="upper-box">
+        <div class="degree">
+          <p>Degree</p>
+          <input type="number" id="tempInput" name="tempInput" />
+        </div>
+        <div class="type">
+          <p>Type</p>
+          <select id="tempType" name="tempType">
+            <option value="fahrenheit">Fahrenheit</option>
+            <option value="kelvin">Kelvin</option>
+          </select>
+        </div>
+      </div>
+      <div class="result-box">
+        <p>Result</p>
+        <div id="result"></div>
+        <hr />
+      </div>
+      <button class="button" onclick="convertToDegree()">Convert</button>
+    </div>
+    <script>
+      function convertToDegree() {
+        const input = document.getElementById('tempInput').value
+        const tempType = document.getElementById('tempType').value
+        const resultDisplay = document.getElementById('result')
+
+        let result = 0
+
+        if (input !== '') {
+          let inputValue = BigInt(input)
+          if (tempType === 'fahrenheit') {
+            result = parseFloat(input) * (9 / 5) + 32
+          }
+          if (tempType === 'kelvin') {
+            result = parseFloat(input) + 273.15
+          }
+          resultDisplay.style.color = 'black'
+        } else {
+          result = 'Enter the temperature please!'
+          resultDisplay.style.color = 'red'
+        }
+         resultDisplay.innerHTML = result.toString()
+      }
+
+      document.getElementById('tempType').addEventListener('change', convertToDegree)
+    </script>
+  </body>
+</html>
